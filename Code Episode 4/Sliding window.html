@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+  body {
+    background-color: #F5F5F5;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 40px;
+  }
+  #phrase {
+    position: relative;
+    font-size: 24px;
+    line-height: 1.6;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .word {
+    display: inline-block;
+    position: relative;
+    margin-right: 5px;
+    vertical-align: top;
+  }
+  #highlight {
+    position: absolute;
+    background-color: rgba(255, 208, 97, 0.4); /* #FFD061 with transparency */
+    border: 2px solid #000;
+    border-radius: 8px;
+    pointer-events: none;
+    transition: all 0.5s ease;
+    box-sizing: border-box;
+  }
+</style>
+</head>
+<body>
+
+<div id="phrase">
+  <span class="word">The</span>
+  <span class="word">quick</span>
+  <span class="word">brown</span>
+  <span class="word">fox</span>
+  <span class="word">jumps</span>
+  <span class="word">over</span>
+  <span class="word">the</span>
+  <span class="word">lazy</span>
+  <span class="word">dog.</span>
+  <div id="highlight"></div>
+</div>
+
+<script>
+  const words = document.querySelectorAll('#phrase .word');
+  const highlight = document.getElementById('highlight');
+  let index = 0;
+
+  function moveHighlight() {
+    const totalWords = words.length;
+
+    if (index + 2 < totalWords) {
+      const firstWord = words[index];
+      const lastWord = words[index + 2];
+
+      const firstWordOffsetLeft = firstWord.offsetLeft;
+      const firstWordOffsetTop = firstWord.offsetTop;
+      const lastWordOffsetRight = lastWord.offsetLeft + lastWord.offsetWidth;
+
+      highlight.style.left = firstWordOffsetLeft + 'px';
+      highlight.style.top = firstWordOffsetTop + 'px';
+      highlight.style.width = (lastWordOffsetRight - firstWordOffsetLeft) + 'px';
+      highlight.style.height = firstWord.offsetHeight + 'px';
+
+      index++;
+    } else {
+      index = 0;
+    }
+  }
+
+  setInterval(moveHighlight, 1000);
+  moveHighlight();
+</script>
+
+</body>
+</html>
