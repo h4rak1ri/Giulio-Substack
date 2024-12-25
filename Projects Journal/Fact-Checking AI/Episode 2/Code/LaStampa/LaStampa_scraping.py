@@ -6,7 +6,7 @@ import json
 from datetime import datetime
 import time  # For timing features
 import os    # For checking if the TimeReport.json file exists
-
+ 
 ###############################################################
 # Creazione delle funzioni necessarie
 def remove_indent(text):
